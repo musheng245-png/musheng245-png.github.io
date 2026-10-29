@@ -5,6 +5,7 @@
   var toggle = document.querySelector('.theme');
   var meta = document.querySelector('meta[name="theme-color"]');
   var media = window.matchMedia('(prefers-color-scheme: dark)');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var COLORS = { light: '#f2f4ef', dark: '#0e1613' };
 
   function applyTheme(theme) {
@@ -22,15 +23,67 @@
     }
   }
 
+  function saveTheme(theme) {
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {}
+  }
+
+  function commitTheme(theme) {
+    applyTheme(theme);
+    saveTheme(theme);
+  }
+
+  // 从按钮位置扩散，把新主题“铺”开；不支持 View Transitions 时直接切换
+  function switchTheme(next, origin) {
+    if (!document.startViewTransition || reduceMotion.matches) {
+      commitTheme(next);
+      return;
+    }
+
+    var rect = origin.getBoundingClientRect();
+    var x = rect.left + rect.width / 2;
+    var y = rect.top + rect.height / 2;
+    var radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    var transition;
+    try {
+      transition = document.startViewTransition(function () {
+        commitTheme(next);
+      });
+    } catch (e) {
+      commitTheme(next);
+      return;
+    }
+
+    transition.ready
+      .then(function () {
+        document.documentElement.animate(
+          {
+            clipPath: [
+              'circle(0px at ' + x + 'px ' + y + 'px)',
+              'circle(' + radius + 'px at ' + x + 'px ' + y + 'px)'
+            ]
+          },
+          {
+            duration: 800,
+            easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
+            pseudoElement: '::view-transition-new(root)'
+          }
+        );
+      })
+      .catch(function () {});
+  }
+
   if (toggle) {
     applyTheme(root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
     toggle.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-      try {
-        localStorage.setItem('theme', next);
-      } catch (e) {}
+      switchTheme(next, toggle);
     });
   }
 
