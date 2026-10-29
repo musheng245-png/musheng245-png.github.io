@@ -42,12 +42,9 @@
     }
 
     var rect = origin.getBoundingClientRect();
-    var x = rect.left + rect.width / 2;
-    var y = rect.top + rect.height / 2;
-    var radius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
+    // 用百分比定位，跟设备像素比和页面缩放都无关
+    var x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
+    var y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
 
     var transition;
     try {
@@ -64,8 +61,8 @@
         document.documentElement.animate(
           {
             clipPath: [
-              'circle(0px at ' + x + 'px ' + y + 'px)',
-              'circle(' + radius + 'px at ' + x + 'px ' + y + 'px)'
+              'circle(0% at ' + x + '% ' + y + '%)',
+              'circle(160% at ' + x + '% ' + y + '%)'
             ]
           },
           {
