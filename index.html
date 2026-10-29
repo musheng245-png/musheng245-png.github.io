@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>无敌电火机 — 普天之下，通天之人</title>
+  <meta name="description" content="无敌电火机（IL）的个人主页。普天之下，通天之人。" />
+  <meta name="theme-color" content="#f2f4ef" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:title" content="无敌电火机 — 普天之下，通天之人" />
+  <meta property="og:description" content="普天之下，通天之人。" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/archivo@5/wdth.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/500.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 先定主题，避免深色模式用户看到闪白 -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta && dark) meta.setAttribute('content', '#0e1613');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+  <div class="sheet">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <div class="layout">
+      <!-- ============ 左侧资料栏 ============ -->
+      <!-- 改这里：名字和首屏大字 -->
+      <aside class="rail" aria-label="个人资料">
+        <div class="rail-head">
+          <a class="mark" href="#top" aria-label="无敌电火机，回到顶部">
+            <svg viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+              <rect x="0.5" y="0.5" width="43" height="43" fill="none" stroke="currentColor" />
+              <rect x="10" y="11" width="4" height="22" fill="currentColor" />
+              <rect x="20" y="11" width="4" height="22" fill="currentColor" />
+              <rect x="20" y="29" width="12" height="4" fill="currentColor" />
+              <rect x="34" y="28" width="5" height="5" fill="var(--accent)" />
+            </svg>
+          </a>
+          <button class="theme" type="button" aria-label="切换到深色模式" aria-pressed="false">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" />
+              <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="rail-id">
+          <p class="rail-name">无敌电火机</p>
+          <p class="rail-latin">IL</p>
+        </div>
+      </aside>
+
+      <main id="main">
+        <!-- ============ 首屏 ============ -->
+        <header class="hero" id="top">
+          <h1 class="display" aria-label="IL">
+            <span class="line"><span>IL</span></span>
+          </h1>
+          <p class="manifesto">普天之下<br />通天之人</p>
+        </header>
+
+        <!-- ============ 图纸标题栏 ============ -->
+        <footer class="footer">
+          <div class="title-block" aria-label="页面信息">
+            <div class="tb-cell"><span class="tb-key">图名</span><span class="tb-val">个人主页</span></div>
+            <div class="tb-cell"><span class="tb-key">绘制</span><span class="tb-val">无敌电火机</span></div>
+            <div class="tb-cell"><span class="tb-key">日期</span><span class="tb-val">2026.10</span></div>
+            <div class="tb-cell"><span class="tb-key">比例</span><span class="tb-val">1 : 1</span></div>
+            <div class="tb-cell"><span class="tb-key">字体</span><span class="tb-val">Archivo / Plex Mono</span></div>
+            <div class="tb-cell"><span class="tb-key">页码</span><span class="tb-val">01 / 01</span></div>
+          </div>
+
+          <div class="colophon">
+            <span>© <span data-year>2026</span> 无敌电火机</span>
+            <span>手写 HTML / CSS，少量 JS</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
