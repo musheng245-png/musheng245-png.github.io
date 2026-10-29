@@ -39,6 +39,8 @@ git push
 
 GitHub Pages 会自动重新发布，通常一到两分钟。
 
+改了 `styles.css` 或 `app.js` 后，记得把 `index.html` 里对应的 `?v=2` 数字加一；否则访客浏览器可能还在用十分钟前的旧缓存。
+
 ## 首次发布步骤（备用）
 
 1. 新建公开仓库 `<用户名>.github.io`。
